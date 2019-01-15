@@ -53,6 +53,23 @@ class UI {
         }
     }
 
+    static showMessage(message, className) {
+        // Create a div element
+        // Set class and append the message
+        const div = document.createElement('div');
+        div.className = `alert alert-${className}`;
+        div.appendChild(document.createTextNode(message));
+        // Get container element
+        const container = document.querySelector('.container');
+        // Get form element
+        const form = document.querySelector('#team-form');
+        container.insertBefore(div, form);
+
+        setTimeout(() => {
+            document.querySelector('.alert').remove()
+        }, 3000);
+    }
+
     static clearFields() {
         document.querySelector('#name').value = '';
         document.querySelector('#country').value = '';
@@ -77,7 +94,8 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
 
     // Validate before save
     if (name === '' || country === '' || majors === '') {
-        alert('Please fill out the form!')
+        // Show message
+        UI.showMessage('Please fill out the form!', 'danger')
     } else {
         // Instantiate Team
         const team = new Team(name, country, majors);
