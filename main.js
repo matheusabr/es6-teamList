@@ -44,6 +44,15 @@ class UI {
         list.appendChild(row);
     }
 
+    static deleteTeam(el) {
+        // console.log(el);
+        // If element class constains delete
+        if (el.classList.contains('delete')) {
+            // Remove the complete line (tr>td)
+            el.parentElement.parentElement.remove();
+        }
+    }
+
     static clearFields() {
         document.querySelector('#name').value = '';
         document.querySelector('#country').value = '';
@@ -77,3 +86,10 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
 });
 
 // Event: remove a team
+document.querySelector('#team-list').addEventListener(('click'), (e) => {
+    // Log clicked component
+    // console.log(e.target);
+    
+    // Delete the team
+    UI.deleteTeam(e.target);
+})
