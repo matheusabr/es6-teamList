@@ -95,13 +95,16 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
     // Validate before save
     if (name === '' || country === '' || majors === '') {
         // Show message
-        UI.showMessage('Please fill out the form!', 'danger')
+        UI.showMessage('Please fill out the form!', 'danger');
     } else {
         // Instantiate Team
         const team = new Team(name, country, majors);
 
         // Add Team to list
         UI.addTeam(team);
+
+        // Show message
+        UI.showMessage('Team added!', 'success');
 
         // Clear fields
         UI.clearFields();
@@ -115,4 +118,7 @@ document.querySelector('#team-list').addEventListener(('click'), (e) => {
     
     // Delete the team
     UI.deleteTeam(e.target);
+
+    // Show message
+    UI.showMessage('Team removed!', 'success');
 })
