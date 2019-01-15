@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- CSS -->
+    <!-- #Bootstrap -->
+    <link rel="stylesheet" type="text/css" media="screen" href="bootstrap.min.css" />
+    <!-- #Fontawesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <!-- Page Title -->
+    <title>CS Team List</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="display-4 text-center">
+            <i class="fas fa-crosshairs text-primary"></i> CS <span class="text-primary">Team</span> List
+        </h1>
+
+        <form id="team-form" class="m-4">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="name">Country</label>
+                <input type="text" id="countrye" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="name">Majors</label>
+                <input type="text" id="majors" class="form-control">
+            </div>
+            <input type="button" value="Add Team" class="btn btn-primary btn-block mt-4">
+        </form>
+
+        <table class="table table-stripped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Country</th>
+                    <th>Majors</th>
+                </tr>
+            </thead>
+            <tbody id="team-list"></tbody>
+        </table>
+    </div>
+    <!-- Javascript -->
+    <script src="main.js"></script>
+</body>
+</html>
