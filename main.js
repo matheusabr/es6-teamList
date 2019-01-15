@@ -75,14 +75,19 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
     const country = document.querySelector('#country').value;
     const majors = document.querySelector('#majors').value;
 
-    // Instantiate Team
-    const team = new Team(name, country, majors);
+    // Validate before save
+    if (name === '' || country === '' || majors === '') {
+        alert('Please fill out the form!')
+    } else {
+        // Instantiate Team
+        const team = new Team(name, country, majors);
 
-    // Add Team to list
-    UI.addTeam(team);
+        // Add Team to list
+        UI.addTeam(team);
 
-    // Clear fields
-    UI.clearFields();
+        // Clear fields
+        UI.clearFields();
+    }
 });
 
 // Event: remove a team
