@@ -10,23 +10,14 @@ class Team {
 // UI Class: handle UI tasks
 class UI {
     static displayTeams() {
-        const StoredTeams = [
-            {
-                name: 'MiBr',
-                country: 'Brazil',
-                majors: 3
-            },
-            {
-                name: 'Astralis',
-                country: 'Denmark',
-                majors: 2
-            },
-        ];
+        console.log(Store.getTeams());
+        
+        const StoredTeams = Store.getTeams();
 
         const teams = StoredTeams;
         console.table(teams);
 
-        teams.forEach((team) => UI.addTeam(team))
+        teams.forEach((team) => UI.addTeam(team));
     }
 
     static addTeam(team) {
@@ -44,7 +35,7 @@ class UI {
         list.appendChild(row);
     }
 
-    static deleteTeam(el) {
+    static removeTeam(el) {
         // console.log(el);
         // If element class constains delete
         if (el.classList.contains('delete')) {
@@ -78,6 +69,32 @@ class UI {
 }
 
 // Store Class: handles storage
+class Store {
+    static getTeams() {
+        let teams = [];
+        const storTeams = localStorage.getItem('teams');
+        if (storTeams !== null) {
+            teams = JSON.parse(storTeams);
+        }
+        return teams;
+    }
+
+    static addTeam(team) {
+        const teams = Store.getTeams();
+        teams.push(team);
+        localStorage.setItem('teams', JSON.stringify(teams));
+    }
+
+    static removeTeam(name) {
+        const teams = Store.getTeams();
+        teams.forEach((team, index) => {
+            if (team.name === name) {
+                teams.splice(index, 1);
+            }
+        });
+        localStorage.setItem('teams', JSON.stringify(teams));
+    }
+}
 
 // Event: display Teams
 document.addEventListener('DOMContentLoaded', UI.displayTeams);
@@ -103,6 +120,9 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
         // Add Team to list
         UI.addTeam(team);
 
+        // Add Team to store
+        Store.addTeam(team);
+
         // Show message
         UI.showMessage('Team added!', 'success');
 
@@ -113,12 +133,19 @@ document.querySelector('#team-form').addEventListener('submit', (e) => {
 
 // Event: remove a team
 document.querySelector('#team-list').addEventListener(('click'), (e) => {
+    const el = e.target;
+
     // Log clicked component
-    // console.log(e.target);
-    
-    // Delete the team
-    UI.deleteTeam(e.target);
+    // console.log(el);
+
+    // Remove Team of store
+    const teamName = el.parentElement.parentElement.firstElementChild.innerText;
+    console.log(teamName);
+    Store.removeTeam(teamName);
+
+    // Remove Team from UI
+    UI.removeTeam(el);
 
     // Show message
-    UI.showMessage('Team removed!', 'success');
+    UI.showMessage(`${teamName} was removed!`, 'success');
 })
