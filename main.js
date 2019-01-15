@@ -24,6 +24,7 @@ class UI {
         ];
 
         const teams = StoredTeams;
+        console.table(teams);
 
         teams.forEach((team) => UI.addTeam(team))
     }
@@ -42,6 +43,12 @@ class UI {
 
         list.appendChild(row);
     }
+
+    static clearFields() {
+        document.querySelector('#name').value = '';
+        document.querySelector('#country').value = '';
+        document.querySelector('#majors').value = '';
+    }
 }
 
 // Store Class: handles storage
@@ -50,5 +57,23 @@ class UI {
 document.addEventListener('DOMContentLoaded', UI.displayTeams);
 
 // Event: add a Team
+document.querySelector('#team-form').addEventListener('submit', (e) => {
+    // Prevent submit default refresh action
+    e.preventDefault()
+
+    // Get form values
+    const name = document.querySelector('#name').value;
+    const country = document.querySelector('#country').value;
+    const majors = document.querySelector('#majors').value;
+
+    // Instantiate Team
+    const team = new Team(name, country, majors);
+
+    // Add Team to list
+    UI.addTeam(team);
+
+    // Clear fields
+    UI.clearFields();
+});
 
 // Event: remove a team
